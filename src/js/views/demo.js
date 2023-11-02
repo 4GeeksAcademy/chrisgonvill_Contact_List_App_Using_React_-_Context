@@ -1,16 +1,28 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 
-import "../../styles/demo.css";
-
 export const Demo = () => {
-	const { store, actions } = useContext(Context);
+    const { store, actions } = useContext(Context);
+    const [formData, setFormData] = useState({
+        full_name: "",
+        email: "",
+        phone: "",
+        address: ""
+    });
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        actions.addContact(formData); 
+    };
 
 	return (
+		
 		<div className="container">
-			<form>
+            <form onSubmit={handleSubmit}>
 				<div class="col-12">
 					<label for="inputName" class="form-label">Full Name</label>
 					<input type="text" class="form-control" id="inputName" placeholder="Chuck Norris" />
@@ -26,9 +38,8 @@ export const Demo = () => {
 					<label for="inputAddress" class="form-label">Address</label>
 					<input type="text" class="form-control" id="inputAddress" placeholder="4321 Chuck Norris St" />
 				</div>
-				<button type="submit" className="btn btn-primary">Submit</button>
-			</form>
-
-		</div>
-	)
-}
+				<button type="submit" className="btn btn-primary">Agregar Contacto</button>
+            </form>
+        </div>
+    );
+};
