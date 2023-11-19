@@ -8,13 +8,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getContacts: async () => {
 				try {
 					const response = await fetch(
-						"https://playground.4geeks.com/apis/fake/contact/agenda/chris_gonvill"
+						"https://playground.4geeks.com/apis/fake/contact/agenda/chrisgonvill"
 					);
 					if (response.ok) {
 						const data = await response.json();
 						let store = getStore();
 						setStore({ ...store, Contacts: data });
-						console.log(Contacts)
+						console.log(store.Contacts)
 					}
 				} catch (error) {
 					console.error("Error fetching :", error);
@@ -23,7 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addContact: async (data) => {
 				try {
 					const response = await fetch(
-						"https://playground.4geeks.com/apis/fake/contact/agenda/chris_gonvill",
+						"https://playground.4geeks.com/apis/fake/contact/",
 						{
 							method: "POST",
 							headers: {
@@ -41,7 +41,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.error("Error fetching:", error);
 				}
-			}
+			},
+
+			deleteContact: async (contactId) => {
+                try {
+                    const response = await fetch(
+                        `https://playground.4geeks.com/apis/fake/contact/${contactId}`,
+                        {
+                            method: "DELETE"
+                        }
+                    );
+                    if (response.ok) {
+                        // Manejar la eliminación exitosa
+                        console.log(`Contacto con ID ${contactId} eliminado exitosamente.`);
+                        // Actualizar la lista de contactos después de eliminar
+                        actions.getContacts();
+                    } else {
+                        console.error("Error al borrar el contacto.");
+                    }
+                } catch (error) {
+                    console.error("Error al realizar la solicitud DELETE:", error);
+                }
+            }
+
 		}
 	};
 };

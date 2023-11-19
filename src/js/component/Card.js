@@ -5,11 +5,16 @@ import layout from "../layout";
 
 export const Card = () => {
     const { store, actions } = useContext(Context)
+
     console.log(store.Contacts)
 
-    useEffect (() => {
+    useEffect(() => {
         actions.getContacts()
-    },[])
+    }, [])
+
+    const handleDelete = (contactId) => {
+        actions.deleteContact(contactId); // Envía la solicitud para eliminar el contacto con el ID específico
+    };
 
     return (
         <div className="container">
@@ -22,12 +27,14 @@ export const Card = () => {
                         </div>
                         <div className="col-md-8">
                             <div className="card-body">
-                                <h2 className="card-title">{item.full_name}</h2>
-                                <h2 className="card-title">{item.email}</h2>
-                                <h2 className="card-title">{item.agenda_slug}</h2>
-                                <h2 className="card-title">{item.address}</h2>
-                                <h2 className="card-title">{item.phone}</h2>
-                                
+                                <h2 className="Full Name">{item.full_name}</h2>
+                                <h2 className="Email">{item.email}</h2>
+                                <h2 className="Phone Number">{item.phone}</h2>
+                                <h2 className="Agenda Slug">{item.agenda_slug}</h2>
+                                <h2 className="Address">{item.address}</h2>
+                                <button onClick={() => handleDelete(item.id)} className="btn btn-danger">Borrar Contacto</button>
+
+
                             </div>
                         </div>
                     </div>

@@ -7,6 +7,7 @@ export const Demo = () => {
         full_name: "",
         email: "",
         phone: "",
+        agenda_slug: "chrisgonvill",
         address: ""
     });
 
@@ -16,29 +17,29 @@ export const Demo = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        actions.addContact(formData); 
+        actions.addContact(formData);
     };
+    console.log(formData)
+    return (
 
-	return (
-		
-		<div className="container">
+        <div className="container">
             <form onSubmit={handleSubmit}>
-				<div class="col-12">
-					<label for="inputName" class="form-label">Full Name</label>
-					<input type="text" class="form-control" id="inputName" placeholder="" />
-				</div>
-				<div className="mb-3">
-					<label for="exampleInputEmail1" className="form-label">Email Adress</label>
-					<input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" />
-					<div id="emailHelp" className="form-text"></div>
-				</div><div class="col-12">
-					<label for="inputPhone" class="form-label">Phone Number</label>
-					<input type="text" class="form-control" id="inputPhone" placeholder="" />
-				</div><div class="col-12">
-					<label for="inputAddress" class="form-label">Address</label>
-					<input type="text" class="form-control" id="inputAddress" placeholder="" />
-				</div>
-				<button type="submit" className="btn btn-primary">Agregar Contacto</button>
+                <div className="col-12">
+                    <label htmlFor="inputName" className="form-label">Full Name</label>
+                    <input type="text" className="form-control" id="inputName" placeholder="" onChange={handleChange} name="full_name"  />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="exampleInputEmail1" className="form-label">Email Adress</label>
+                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=""onChange={handleChange} name="email" />
+                    <div id="emailHelp" className="form-text"></div>
+                </div><div className="col-12">
+                    <label htmlFor="inputPhone" className="form-label">Phone Number</label>
+                    <input type="text" className="form-control" id="inputPhone" placeholder=""onChange={handleChange} name="phone" />
+                </div><div className="col-12">
+                    <label htmlFor="inputAddress" className="form-label">Address</label>
+                    <input type="text" className="form-control" id="inputAddress" placeholder="" onChange={handleChange} name="address" />
+                </div>
+                <button type="submit" className="btn btn-primary">Agregar Contacto</button>
             </form>
         </div>
     );
